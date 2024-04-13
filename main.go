@@ -160,5 +160,7 @@ func main() {
 	http.Handle("/metrics", &MetricsHandler{apiClient: apiClient})
 
 	log.Printf("listening at http://%s/metrics", listenAddr.String())
-	http.ListenAndServe(listenAddr.String(), nil)
+	if err := http.ListenAndServe(listenAddr.String(), nil); err != nil {
+		log.Fatal(err)
+	}
 }
