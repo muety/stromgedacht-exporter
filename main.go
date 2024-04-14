@@ -75,7 +75,7 @@ func (h *MetricsHandler) fetchNowState(zip string) (Metric, error) {
 
 	return &GaugeMetric{
 		Name:   MetricsPrefix + "_state_now",
-		Value:  int64(*(*nowState).State),
+		Value:  int64((*nowState).State),
 		Desc:   DescNow,
 		Labels: nil,
 	}, nil
@@ -84,22 +84,21 @@ func (h *MetricsHandler) fetchNowState(zip string) (Metric, error) {
 func (h *MetricsHandler) fetchForecastData(zip string) (Metrics, error) {
 	now := time.Now()
 
-	forecast, err := h.apiClient.GetForecast(zip, &now, &now)
+	forecast, err := h.apiClient.GetForecast(zip, now, now)
 	if err != nil {
 		return nil, err
 	}
 
-	getClosest := func(points *[]api.ForecastPointInTimeViewModel) *api.ForecastPointInTimeViewModel {
-		p := *points
-		if len(p) == 0 {
+	getClosest := func(points []api.ForecastPointInTimeViewModel) *api.ForecastPointInTimeViewModel {
+		if len(points) == 0 {
 			return nil
 		}
-		sort.Slice(p, func(i, j int) bool {
-			d1 := (*p[i].DateTime).Sub(now).Abs()
-			d2 := (*p[j].DateTime).Sub(now).Abs()
+		sort.Slice(points, func(i, j int) bool { // inplace
+			d1 := (points[i].DateTime).Sub(now).Abs()
+			d2 := (points[j].DateTime).Sub(now).Abs()
 			return d1 < d2
 		})
-		return &(p[0])
+		return &(points[0])
 	}
 
 	pointLoad := getClosest(forecast.Load)
@@ -114,25 +113,25 @@ func (h *MetricsHandler) fetchForecastData(zip string) (Metrics, error) {
 	return []Metric{
 		&GaugeMetric{
 			Name:   MetricsPrefix + "_load",
-			Value:  int64(*pointLoad.Value),
+			Value:  int64(pointLoad.Value),
 			Desc:   DescLoad,
 			Labels: nil,
 		},
 		&GaugeMetric{
 			Name:   MetricsPrefix + "_renewable_energy",
-			Value:  int64(*pointRenewableEnergy.Value),
+			Value:  int64(pointRenewableEnergy.Value),
 			Desc:   DescRenewableEnergy,
 			Labels: nil,
 		},
 		&GaugeMetric{
 			Name:   MetricsPrefix + "_residual_load",
-			Value:  int64(*pointResidualLoad.Value),
+			Value:  int64(pointResidualLoad.Value),
 			Desc:   DescResidualLoad,
 			Labels: nil,
 		},
 		&GaugeMetric{
 			Name:   MetricsPrefix + "_supergreen_threshold",
-			Value:  int64(*pointSuperGreenThreshold.Value),
+			Value:  int64(pointSuperGreenThreshold.Value),
 			Desc:   DescSuperGreenThreshold,
 			Labels: nil,
 		},

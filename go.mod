@@ -9,4 +9,4 @@ require (
 	golang.org/x/net v0.20.0 // indirect
 )
 
-replace github.com/jxsl13/stromgedacht v0.2.0 => github.com/muety/stromgedacht v0.0.0-20240413150119-5e9a413c0e3d
+replace github.com/jxsl13/stromgedacht v0.2.0 => github.com/muety/stromgedacht v0.0.0-20240414201316-bc22bf5eee69
