@@ -1,7 +1,7 @@
 github.com/go-resty/resty/v2 v2.7.0 h1:me+K9p3uhSmXtrBZ4k9jcEAfJmuC8IivWHwaLZwPrFY=
 github.com/go-resty/resty/v2 v2.7.0/go.mod h1:9PWDzw47qPphMRFfhsyk0NnSgvluHcljSMVIq3w7q0I=
-github.com/muety/stromgedacht v0.0.0-20240414201316-bc22bf5eee69 h1:f/CJVWcqSgf/L2XJdEYQB1O7B/61VvdM5E9Ll/Uh1SQ=
-github.com/muety/stromgedacht v0.0.0-20240414201316-bc22bf5eee69/go.mod h1:mRbw5Rxra9cBxNdAGp9tF9scJQ2XP7U/z4/lEitq/JY=
+github.com/jxsl13/stromgedacht v0.3.0 h1:ayvvajpwmazsCH8QgcwIvjwHghAU6h7cGQFWKZdNz1Q=
+github.com/jxsl13/stromgedacht v0.3.0/go.mod h1:mRbw5Rxra9cBxNdAGp9tF9scJQ2XP7U/z4/lEitq/JY=
 golang.org/x/net v0.0.0-20211029224645-99673261e6eb/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/net v0.20.0 h1:aCL9BSgETF1k+blQaYUBx9hJ9LOGP3gAVemcZlf1Kpo=
 golang.org/x/net v0.20.0/go.mod h1:z8BVo6PvndSri0LbOE3hAn0apkU+1YvI6E70E9jsnvY=
