@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"net/netip"
+	"os"
 	"sort"
 	"time"
 )
@@ -46,7 +47,7 @@ func (h *MetricsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// metric: now state
 	metricNowState, err := h.fetchNowState(zip)
 	if err != nil {
-		fmt.Errorf("failed to fetch now state for zip %s, %v\n", zip, err)
+		fmt.Fprintf(os.Stderr, "failed to fetch now state for zip %s, %v\n", zip, err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -55,7 +56,7 @@ func (h *MetricsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// metrics: forecast stats
 	metricsForecastData, err := h.fetchForecastData(zip)
 	if err != nil {
-		fmt.Errorf("failed to fetch now state for zip %s, %v\n", zip, err)
+		fmt.Fprintf(os.Stderr, "failed to fetch now state for zip %s, %v\n", zip, err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
